@@ -1,16 +1,19 @@
-import { Nav } from "./interfaces";
 
 export const headerNav : Nav[] = [
   {
-    name: "Self Care",
+    title: "Home",
+    href: "/"
+  },
+  {
+    title: "Self Care",
     href: "/selfcare",
   },
   {
-    name: "Relaxation",
+    title: "Relaxation",
     href: "/relaxation",
   },
   {
-    name: "Contact",
+    title: "Contact",
     href: "/contact",
   },
 ]
