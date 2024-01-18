@@ -30,8 +30,8 @@ export default function BurgerNav() {
       </div>
       <div id="burgerContainer" className="hidden bg-orange-500 absolute w-screen h-full top-0 left-0">
         <div onClick={handleMenuStatus} className="w-8 h-8 relative top-8 left-[88%] cursor-pointer">
-          <div className="border border-white border-x-0 border-y-1 rounded-sm rotate-45 w-8 absolute top-[14px]"></div>
-          <div className="border border-white border-x-0 border-y-1 rounded-sm -rotate-45 w-8 absolute top-[14px]"></div>
+          <div className="bg-white border border-white border-x-0 border-y-1 rounded-sm rotate-45 w-8 absolute top-[14px]"></div>
+          <div className="bg-white border border-white border-x-0 border-y-1 rounded-sm -rotate-45 w-8 absolute top-[14px]"></div>
         </div>
         <nav className="mt-16 px-8">
           <ul>
