@@ -5,7 +5,7 @@ export const headerNav : Nav[] = [
     href: "/"
   },
   {
-    title: "Self Care",
+    title: "Self-Care",
     href: "/selfcare",
   },
   {
