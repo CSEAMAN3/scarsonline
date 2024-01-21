@@ -35,7 +35,7 @@ export default function ContactForm() {
 
     const {name, useremail, message} = formData
 
-    const res = await fetch("https://www.scarsonline.co.uk/api/resend/send-email", {
+    const res = await fetch("https://scarsonline.co.uk/api/resend/send-email", {
       method: "POST",
       headers: {
         "Content-Type" : "application/json"
