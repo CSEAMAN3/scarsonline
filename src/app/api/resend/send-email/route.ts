@@ -1,6 +1,7 @@
 import { EmailTemplate } from '@/components/email-template';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { limiter } from '../../config/limiter';
 
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -16,6 +17,20 @@ type FormData = {
 
 
 export async function POST(request : NextRequest) {
+
+  const remaining = await limiter.removeTokens(1)
+  const origin = request.headers.get('origin') || "www.scarsonline.co.uk"
+
+  if(remaining < 1){
+    return new NextResponse(null, {
+      status: 429,
+      statusText: "to many requests",
+      headers: {
+        "Access-Control-Allow-Origin": origin,
+        "Content-Type": "text/plain" 
+      }
+    })
+  }
 
   const data : FormData = await request.json()
   const {name, useremail, message} = data
