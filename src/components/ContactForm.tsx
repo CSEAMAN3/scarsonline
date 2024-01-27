@@ -2,9 +2,7 @@
 
 import { ChangeEvent, FormEvent, useState } from "react"
 import { useRouter } from "next/navigation"
-// import Script from "next/script"
-// import useEffect
-// import { useEffect } from "react"
+import Script from "next/script"
 
 const initdata = {
   name: "",
@@ -14,28 +12,44 @@ const initdata = {
 
 export default function ContactForm() {
 
+
   const router = useRouter()
   const [formData, setFormData] = useState(initdata)
-
-  // handleTurnstileToken
-  // const handleTokenChange = (token) => {
-  //   setFormData({ ...formData, turnstileToken: token });
-  // };
-
 
   const handleInput = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const name = e.target.name
     setFormData((prevFormData) => ({...prevFormData, [name]:e.target.value}))
   }
 
-  const handleForm = async(e: FormEvent<HTMLFormElement>) => {
+  // const handleForm = async(e: FormEvent<HTMLFormElement>) => {
+    
+  //   e.preventDefault()
+  //   console.log(formData)
+
+  //   const {name, useremail, message} = formData
+
+  //   const res = await fetch("https://scarsonline.co.uk/api/resend/send-email", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type" : "application/json"
+  //     },
+  //     body: JSON.stringify({name, useremail, message})
+  //   })
+
+  //   const result = await res.json()
+  //   console.log(result)
+  //   router.push("/thankyou")
+  // }
+
+// below handle form is for development only
+    const handleForm = async(e: FormEvent<HTMLFormElement>) => {
     
     e.preventDefault()
     console.log(formData)
 
     const {name, useremail, message} = formData
 
-    const res = await fetch("https://scarsonline.co.uk/api/resend/send-email", {
+    const res = await fetch("http://localhost:3000/api/resend/send-email", {
       method: "POST",
       headers: {
         "Content-Type" : "application/json"
@@ -48,27 +62,17 @@ export default function ContactForm() {
     router.push("/thankyou")
   }
 
-  // const handleForm = async (e: React.FormEvent) => {
-  //   e.preventDefault()
-  //   const formData = new FormData(e.target as HTMLFormElement)
-  //   const turnstileRes = formData.get('cf-turnstile-response') as string
-
-  //   const res = await fetch("http://localhost:3000/api/resend/send-email", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type" : "application/json"
-  //     },
-  //     body: JSON.stringify({...formData, turnstileRes})
-  //   })
-
-  //   const result = await res.json()
-  //   console.log(result)
-  //   router.push("/thankyou")
-
-  // }
-
+// above handleform is for development only
 
   return (
+    <>
+    <Script 
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        strategy="lazyOnload" // Loads the script when needed
+        onLoad={() => {
+          console.log("Turnstile script loaded!");
+        }}
+      />
     <form onSubmit={handleForm} className="flex flex-col">
 
       <label 
@@ -121,13 +125,17 @@ export default function ContactForm() {
         required
       />
 
-      {/* include turnstile */}
-       {/* <div className="cf-turnstile mt-4 mb-8" data-sitekey={process.env.CLOUDFLARE_SITE_KEY} data-callback="handleTokenChange"></div> */}
-       {/* <div className="cf-turnstile" data-sitekey={process.env.NEXT_PUBLIC_CLOUDFLARE_SITE_KEY} data-callback="handleTokenChange"></div> */}
-       {/* <div className="cf-turnstile" data-sitekey={process.env.CLOUDFLARE_SECRET_KEY}></div> */}
+      {/* cloudflare turnstile div */}
+      {/* <div 
+        id="myTurnstile"
+        className="cf-turnstile" 
+        data-theme="light"
+        data-sitekey={process.env.NEXT_PUBLIC_CLOUDFLARE_SITE_KEY}
+      ></div> */}
 
-    <button type="submit" className="font-bold text-white bg-orange-400 p-2 max-w-[400px] mb-8 hover:shadow-inner rounded-sm">SEND</button>
+      <button type="submit" className="font-bold text-white bg-orange-400 p-2 max-w-[400px] mb-8 hover:shadow-inner rounded-sm">SEND</button>
 
     </form>
+    </>
   )
-}
+  }

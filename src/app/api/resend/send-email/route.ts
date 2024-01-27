@@ -12,7 +12,7 @@ type FormData = {
   name: string,
   useremail: string,
   message: string,
-  turnstileToken?: string,
+  // turnstileToken?: string,
 }
 
 
@@ -41,22 +41,6 @@ export async function POST(request : NextRequest) {
       message: "Unprocessable entity - missing fields"
     });
   }
-
-    // Validate Turnstile Token
-  // const verifyResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  //   body: `secret=${process.env.CLOUDFLARE_SECRET_KEY}&response=${turnstileToken}`,
-  // });
-  // const verifyData = await verifyResponse.json();
-
-  // if (!verifyData.success) {
-  //   return NextResponse.json({
-  //     status: 403,
-  //     message: "Failed Turnstile verification"
-  //   });
-  // }
-
 
   try {
     const data = await resend.emails.send({

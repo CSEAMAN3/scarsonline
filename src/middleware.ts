@@ -5,7 +5,7 @@ const allowedOrigins = process.env.NODE_ENV === "production"
 ["http://localhost:3000"]
 
 export function middleware(request : Request) {
-
+  
   const origin = request.headers.get("origin")
   console.log(origin)
 
