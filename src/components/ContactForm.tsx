@@ -21,35 +21,14 @@ export default function ContactForm() {
     setFormData((prevFormData) => ({...prevFormData, [name]:e.target.value}))
   }
 
-  // const handleForm = async(e: FormEvent<HTMLFormElement>) => {
-    
-  //   e.preventDefault()
-  //   console.log(formData)
-
-  //   const {name, useremail, message} = formData
-
-  //   const res = await fetch("https://scarsonline.co.uk/api/resend/send-email", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type" : "application/json"
-  //     },
-  //     body: JSON.stringify({name, useremail, message})
-  //   })
-
-  //   const result = await res.json()
-  //   console.log(result)
-  //   router.push("/thankyou")
-  // }
-
-// below handle form is for development only
-    const handleForm = async(e: FormEvent<HTMLFormElement>) => {
+  const handleForm = async(e: FormEvent<HTMLFormElement>) => {
     
     e.preventDefault()
     console.log(formData)
 
     const {name, useremail, message} = formData
 
-    const res = await fetch("http://localhost:3000/api/resend/send-email", {
+    const res = await fetch("https://scarsonline.co.uk/api/resend/send-email", {
       method: "POST",
       headers: {
         "Content-Type" : "application/json"
@@ -61,6 +40,27 @@ export default function ContactForm() {
     console.log(result)
     router.push("/thankyou")
   }
+
+// below handle form is for development only
+  //   const handleForm = async(e: FormEvent<HTMLFormElement>) => {
+    
+  //   e.preventDefault()
+  //   console.log(formData)
+
+  //   const {name, useremail, message} = formData
+
+  //   const res = await fetch("http://localhost:3000/api/resend/send-email", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type" : "application/json"
+  //     },
+  //     body: JSON.stringify({name, useremail, message})
+  //   })
+
+  //   const result = await res.json()
+  //   console.log(result)
+  //   router.push("/thankyou")
+  // }
 
 // above handleform is for development only
 
